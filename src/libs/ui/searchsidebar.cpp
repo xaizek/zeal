@@ -388,6 +388,21 @@ bool SearchSidebar::eventFilter(QObject *object, QEvent *event)
             QCoreApplication::sendEvent(m_treeView, event);
             break;
         }
+
+        if (e->modifiers() == Qt::ControlModifier) {
+            switch (e->key()) {
+            case Qt::Key_N: {
+                QKeyEvent newEvent(QKeyEvent::KeyPress, Qt::Key_Down, Qt::NoModifier);
+                QCoreApplication::sendEvent(m_treeView, &newEvent);
+                break;
+            }
+            case Qt::Key_P: {
+                QKeyEvent newEvent(QKeyEvent::KeyPress, Qt::Key_Up, Qt::NoModifier);
+                QCoreApplication::sendEvent(m_treeView, &newEvent);
+                break;
+            }
+            }
+        }
     }
 
     return Sidebar::View::eventFilter(object, event);
